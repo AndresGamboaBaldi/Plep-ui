@@ -27,3 +27,14 @@
 .labels{
     margin-top: 1rem;
 }
+
+.btn-showHide{
+    border-color: #282828 !important;
+    background-color: white !important;
+    border-radius: 30px !important;
+}
+
+.icons{
+    color: #282828 !important;
+}
+

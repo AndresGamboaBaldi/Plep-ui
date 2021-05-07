@@ -8,6 +8,7 @@
 .bodyDisplay{
     color:white;
     background-color: #282828;
+    border-color: #282828 !important;
     width: 100%;
     font-size: 30px;
 }
@@ -15,10 +16,12 @@
 .headerDisplay{
     color: white;
     background-color: #282828;
+    border-color: #282828 !important;
     font-size: 100px;
 }
 
 .cardDisplay{
     width: auto;
     background-color: #282828 !important;
+    border-color: #282828;
 }
