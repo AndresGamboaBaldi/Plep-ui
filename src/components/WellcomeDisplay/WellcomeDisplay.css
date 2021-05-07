@@ -1,0 +1,24 @@
+.header{
+    color: white;
+    background-color: #282828;
+    font-size: 120px;
+    width: auto;   
+}
+
+.bodyDisplay{
+    color:white;
+    background-color: #282828;
+    width: 100%;
+    font-size: 30px;
+}
+
+.headerDisplay{
+    color: white;
+    background-color: #282828;
+    font-size: 100px;
+}
+
+.cardDisplay{
+    width: auto;
+    background-color: #282828 !important;
+}
