@@ -1,0 +1,42 @@
+.form{
+    background-color: white;
+    margin-top: 35%;
+    border-radius: 10px;
+
+}
+
+.btn-sesion{
+    background-color: red !important;
+    border-color: red !important;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px !important;
+}
+
+.btn-register{
+    background-color: #282828 !important;
+    border-color: #282828 !important;
+    border-radius: 10px !important;
+    margin-bottom: 1rem;
+
+}
+
+.card{
+    border-radius: 10px !important;
+    margin-top: 3px;
+}
+
+.labels{
+    margin-top: 3rem;
+}
+
+.btn-showHide{
+    border-color: #282828 !important;
+    background-color: white !important;
+    border-radius: 30px !important;
+}
+
+.icons{
+    color: #282828 !important;
+}
+
