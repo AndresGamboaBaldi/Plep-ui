@@ -9,6 +9,7 @@
     background-color: red !important;
     border-color: red !important;
     margin: 1rem;
+    margin-bottom: 2rem;
     border-radius: 10px !important;
 }
 
@@ -16,11 +17,12 @@
     background-color: #282828 !important;
     border-color: #282828 !important;
     border-radius: 10px !important;
+    margin-bottom: 1rem;
 
 }
 
 .card{
-    border-radius: 10px;
+    border-radius: 10px !important;
     margin-top: 3px;
 }
 
