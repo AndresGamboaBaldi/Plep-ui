@@ -6,8 +6,8 @@ import { FlagFill } from 'react-bootstrap-icons';
 export default function Video(
 ) {
   return (
-    <Container>
-      <Card className="text-left" style={{ width: "400px" }} >
+    <Container fluid>
+      <Card className="text-left" >
         <Row noGutters>
           <Col xs={4}>
             <img
@@ -19,7 +19,7 @@ export default function Video(
           <Col xs={8}>
             <Card.Body>
               <Card.Title>Godzila vs Kong</Card.Title>
-              <Card.Text >Action</Card.Text>
+              <Card.Text className="red-text">Action</Card.Text>
               <Card.Text ><FlagFill /> Estados Unidos</Card.Text>
               <Card.Text >10/02/2012</Card.Text>
             </Card.Body>

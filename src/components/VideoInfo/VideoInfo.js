@@ -15,17 +15,13 @@ export default function VideoInfo(
   const [open, setOpen] = useState(false);
   return (
     <Container fluid>
-      <Row noGutters>
-        <Col lg={6} md={12}>
+      
           <ReactPlayer
             width="100%"
             controls
             url="https://youtu.be/odM92ap8_c0"
           />
-        </Col>
-      </Row>
-      <Row noGutters>
-        <Col lg={6} md={12}>
+
           <Card className="text-left">
             <div id="module" class="card-block px-2">
               <Row noGutters>
@@ -62,8 +58,6 @@ export default function VideoInfo(
               </Button>
             </div>
           </Card>
-        </Col>
-      </Row>
     </Container>
   );
 }
