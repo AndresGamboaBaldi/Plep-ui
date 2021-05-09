@@ -1,0 +1,34 @@
+.form{
+    background-color: white;
+    margin-top: 1rem;
+    border-radius: 10px;
+
+}
+
+.btn-registrarse{
+    background-color: red !important;
+    border-color: red !important;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px !important;
+}
+
+
+.labels{
+    margin-top: 1rem;
+}
+
+.btn-showHide{
+    border-color: #282828 !important;
+    background-color: white !important;
+    border-radius: 30px !important;
+    margin-top: 3rem;
+}
+
+.icons{
+    color: #282828 !important;
+}
+
+.label-text{
+    margin: auto;
+}
