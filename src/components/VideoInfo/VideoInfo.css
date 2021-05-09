@@ -1,0 +1,17 @@
+.info-card{
+  background-color: #282828 !important;
+  color: #FFFFFF;
+  padding: 8px 0px;
+}
+
+.title-text{
+  font-size: 24px !important;
+}
+
+.genre-text{
+  color: #FF0000;
+}
+
+.link-button{
+  color: #3D3D3D !important;
+}
