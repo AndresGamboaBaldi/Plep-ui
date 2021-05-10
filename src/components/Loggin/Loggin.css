@@ -30,6 +30,11 @@
     margin-top: 3rem;
 }
 
+.labelsHeader{
+    margin-top: 1rem;
+    font-size: 30px;
+}
+
 .btn-showHideLoggin{
     border-color: #282828 !important;
     background-color: white !important;

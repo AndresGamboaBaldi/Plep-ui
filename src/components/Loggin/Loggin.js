@@ -85,8 +85,9 @@ export default function Loggin() {
     <div>
       <Form className="text-center bg-white formLoggin">
         <Form.Group controlId="formBasicEmail">
-          <Form.Label className="labels">Email address</Form.Label>
-
+          <Form.Label className="labelsHeader">Bienvenido a Plep videos!!!</Form.Label>
+          <br/>
+          <Form.Label className="labels">Email</Form.Label>
           <Container>
             <Row>
               <Col xs={1}></Col>
@@ -94,6 +95,7 @@ export default function Loggin() {
                 <PersonCircle size={40} />
               </Col>
               <Col xs={9}>
+                
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
