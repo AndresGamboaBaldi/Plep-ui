@@ -12,6 +12,7 @@ export default function App () {
     <Route exact path="/" component={StartPage} />
     <Route path="/register" component={RegisterPage} />
     <Route path="/detail" component={Detail} />
+    <Route path="/home" component={Home} />
   </Router>
   );
 };
