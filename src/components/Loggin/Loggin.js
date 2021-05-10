@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import {withRouter} from 'react-router';
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import {
   PersonCircle,
@@ -8,16 +10,29 @@ import {
   EyeSlashFill,
 } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
-
+import axios from "axios";
 import "./Loggin.css";
+
 export default function Loggin() {
   const [values, setValues] = React.useState({
-    password: "",
     showPassword: false,
+    data: [],
   });
+
+  const[email, setEmail] = React.useState('');
+  const[password, setPassword] = React.useState('');
+  let history = useHistory();
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -28,12 +43,51 @@ export default function Loggin() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  async function verifyPassword() {
+    axios
+      .get("https://plep.herokuapp.com/api/user")
+      .then((response) => {
+        values.data = response.data;
+        console.log("funciona", values.data);
+        var flag=false;
+        for (var x = 0; x < values.data.length; x++) {
+          if (
+            email == values.data[x].email &&
+            password == values.data[x].password
+          ) {
+            console.log("login!");
+            flag=true;
+            x=values.data.length;
+          } else{
+            console.log("no login");
+            console.log("Usuario introducido", email);
+            console.log("Usuario esperado", values.data[x].email);
+            
+            console.log("Contrasena introducida", password);
+            console.log("Contrasena esperada", values.data[x].password);
+          }
+        }
+        if(flag)
+        {
+          history.push("/detail");
+        }
+      })
+      .catch((e) => {
+        console.log("error", e);
+      });
+  };
+
+  function goToRegister () {
+    history.push("/register")
+  }
+
   return (
     <div>
-      <Form className="text-center bg-white form">
+      <Form className="text-center bg-white formLoggin">
         <Form.Group controlId="formBasicEmail">
-          <Form.Label className="labels">Email address</Form.Label>
-
+          <Form.Label className="labelsHeader">Bienvenido a Plep videos!!!</Form.Label>
+          <br/>
+          <Form.Label className="labels">Email</Form.Label>
           <Container>
             <Row>
               <Col xs={1}></Col>
@@ -41,7 +95,13 @@ export default function Loggin() {
                 <PersonCircle size={40} />
               </Col>
               <Col xs={9}>
-                <Form.Control type="email" placeholder="Enter email" />
+                
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={handleChange}
+                />
               </Col>
               <Col xs={1}></Col>
             </Row>
@@ -62,12 +122,14 @@ export default function Loggin() {
               <Col xs={7}>
                 <Form.Control
                   type={values.showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={handleChangePassword}
                   placeholder="Password"
                 />
               </Col>
               <Col>
                 <Button
-                  className="btn-showHide"
+                  className="btn-showHideLoggin"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                 >
@@ -82,7 +144,7 @@ export default function Loggin() {
             </Row>
           </Container>
         </Form.Group>
-        <Button type="submit" className="btn-sesion">
+        <Button className="btn-sesion" onClick={verifyPassword}>
           Iniciar Sesion
         </Button>
       </Form>
@@ -91,7 +153,7 @@ export default function Loggin() {
           No es un miembro? Registrese hoy!
         </Card.Title>
         <Card.Body>
-          <Button type="submit" className="btn-register">
+          <Button type="submit" className="btn-register" onClick={goToRegister}>
             <EnvelopeFill size={30} /> Registro por correo
           </Button>
         </Card.Body>

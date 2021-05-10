@@ -1,4 +1,4 @@
-.form{
+.formLoggin{
     background-color: white;
     margin-top: 35%;
     border-radius: 10px;
@@ -30,7 +30,12 @@
     margin-top: 3rem;
 }
 
-.btn-showHide{
+.labelsHeader{
+    margin-top: 1rem;
+    font-size: 30px;
+}
+
+.btn-showHideLoggin{
     border-color: #282828 !important;
     background-color: white !important;
     border-radius: 30px !important;
