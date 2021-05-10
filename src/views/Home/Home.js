@@ -12,7 +12,6 @@ useEffect(() => {
       const { data } = await axios.get(
         "https://plep.herokuapp.com/api/movies"
       );
-      console.log(data);
       setMovies(data);
     } catch (err) {
       console.log(err);

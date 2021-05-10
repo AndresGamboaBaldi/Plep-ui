@@ -1,12 +1,21 @@
 import React from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import { FlagFill } from "react-bootstrap-icons";
+import { useHistory } from "react-router-dom";
 import "./Video.css";
 
 export default function Video({ data }) {
+  const history = useHistory();
+
+  function changeRoute (video) {
+    history.push({
+      pathname: '/detail',
+      state: { video: video }
+  })
+  }
   return (
     <Container fluid>
-      <Card className="video-card">
+      <Card className="video-card" onClick={() => changeRoute(data)}>
         <Row noGutters>
           <Col xs={4}>
             <Card.Img
