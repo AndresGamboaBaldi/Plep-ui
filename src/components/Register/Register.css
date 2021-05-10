@@ -1,11 +1,11 @@
-.formLoggin{
+.form{
     background-color: white;
-    margin-top: 35%;
+    margin-top: 1rem;
     border-radius: 10px;
 
 }
 
-.btn-sesion{
+.btn-registrarse{
     background-color: red !important;
     border-color: red !important;
     margin: 1rem;
@@ -13,35 +13,22 @@
     border-radius: 10px !important;
 }
 
-.btn-register{
-    background-color: #282828 !important;
-    border-color: #282828 !important;
-    border-radius: 10px !important;
-    margin-bottom: 1rem;
-
-}
-
-.card{
-    border-radius: 10px !important;
-    margin-top: 3px;
-}
 
 .labels{
-    margin-top: 3rem;
-}
-
-.labelsHeader{
     margin-top: 1rem;
-    font-size: 30px;
 }
 
-.btn-showHideLoggin{
+.btn-showHide{
     border-color: #282828 !important;
     background-color: white !important;
     border-radius: 30px !important;
+    margin-top: 3rem;
 }
 
 .icons{
     color: #282828 !important;
 }
 
+.label-text{
+    margin: auto;
+}
