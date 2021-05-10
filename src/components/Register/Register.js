@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import {
   PersonCircle,
@@ -10,6 +11,8 @@ import {
 import Form from "react-bootstrap/Form";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Register.css";
+import axios from "axios";
+
 export default function Register() {
   const [valuesInitial, setValuesInitial] = React.useState({
     password: "",
@@ -21,8 +24,53 @@ export default function Register() {
     showPasswordConfirm: false,
   });
 
-  const [startDate, setStartDate] = React.useState(new Date());
+  const [values, setValues] = React.useState({
+    data: [],
+  });
 
+  const [name, setName] = React.useState("");
+  const [lastname, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [passwordInitial, setPasswordInitial] = React.useState("");
+  const [passwordConfirm, setPasswordConfirm] = React.useState("");
+  const [birdthday, setbirdthday] = React.useState(new Date());
+  const [gender, setGender] = React.useState("");
+  const [nationality, setNationality] = React.useState("");
+
+  let history = useHistory();
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleChangeLastName = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePasswordInitial = (e) => {
+    setPasswordInitial(e.target.value);
+  };
+
+  const handleChangePasswordConfirm = (e) => {
+    setPasswordConfirm(e.target.value);
+  };
+
+  const handleChangeBirdthday = (e) => {
+    setbirdthday(e.target.value);
+  };
+
+  const handleChangeGender = (e) => {
+    console.log(gender);
+    setGender(e.target.value);
+  };
+
+  const handleChangeNationality = (e) => {
+    setNationality(e.target.value);
+  };
   const handleClickShowPasswordInitial = () => {
     setValuesInitial({
       ...valuesInitial,
@@ -53,17 +101,98 @@ export default function Register() {
     setValuesConfirm({ ...valuesConfirm, [prop]: event.target.valuesConfirm });
   };
 
+  const verifyPasswords = () => {
+    if (passwordInitial === passwordConfirm) {
+      return true;
+    }
+    return false;
+  };
+
+  const verifyFields = () => {
+    if (
+      name.trim() === "" ||
+      lastname.trim() === "" ||
+      passwordInitial.trim() === "" ||
+      passwordConfirm.trim() === "" ||
+      birdthday.trim() === "" ||
+      nationality.trim() === ""
+    ) {
+      console.log("Elemento vacio, llene todos los campos");
+      console.log(name.trim());
+      console.log(lastname.trim());
+      console.log(passwordInitial.trim());
+      console.log(passwordConfirm.trim());
+      console.log(gender.trim());
+      console.log(nationality.trim());
+
+      return false;
+    }
+    return true;
+  };
+
+  async function createUser() {
+    var flag = false;
+    axios
+      .get("https://plep.herokuapp.com/api/user")
+      .then((response) => {
+        values.data = response.data;
+        console.log("funciona", values.data);
+        for (var x = 0; x < values.data.length; x++) {
+          if (email == values.data[x].email) {
+            console.log("correo ya esta registrado!");
+            flag = true;
+            x = values.data.length;
+          }
+        }
+        if (!flag) {
+          console.log("llegue");
+          console.log(flag);
+          if(verifyFields()){
+            if (verifyPasswords()) {
+              axios
+                .post("https://plep.herokuapp.com/api/user", {
+                  userName: name + " " + lastname,
+                  email: email,
+                  password: passwordInitial,
+                  birthdate: birdthday,
+                  gender: gender,
+                  country: nationality,
+                })
+                .then(function (response) {
+                  console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }
+        }
+      })
+      .catch((e) => {
+        console.log("error", e);
+      });
+
+      
+  }
+
   return (
     <Form className="text-center bg-white form">
       <Form.Group controlId="formBasicEmail">
-        <Form.Label className="labels" bold>Registrarse</Form.Label>
+        <Form.Label className="labels">
+          Registrarse
+        </Form.Label>
 
         <Container>
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels"> Nombre </Form.Label>
-              <Form.Control type="text" placeholder="Pepe" />
+              <Form.Control
+                type="text"
+                placeholder="Pepe"
+                value={name}
+                onChange={handleChangeName}
+              />
             </Col>
             <Col xs={1}></Col>
           </Row>
@@ -71,7 +200,12 @@ export default function Register() {
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels"> Apellido </Form.Label>
-              <Form.Control type="text" placeholder="Perez" />
+              <Form.Control
+                type="text"
+                placeholder="Perez"
+                value={lastname}
+                onChange={handleChangeLastName}
+              />
             </Col>
             <Col xs={1}></Col>
           </Row>
@@ -79,7 +213,12 @@ export default function Register() {
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels"> Email </Form.Label>
-              <Form.Control type="email" placeholder="PPerez@gmail.com" />
+              <Form.Control
+                type="email"
+                placeholder="PPerez@gmail.com"
+                value={email}
+                onChange={handleChangeEmail}
+              />
             </Col>
             <Col xs={1}></Col>
             <Form.Text className="text-muted label-text">
@@ -93,6 +232,8 @@ export default function Register() {
               <Form.Control
                 type={valuesInitial.showPasswordInitial ? "text" : "password"}
                 placeholder="Pass123"
+                value={passwordInitial}
+                onChange={handleChangePasswordInitial}
               />
             </Col>
             <Col>
@@ -117,6 +258,8 @@ export default function Register() {
               <Form.Control
                 type={valuesConfirm.showPasswordConfirm ? "text" : "password"}
                 placeholder="Pass123"
+                value={passwordConfirm}
+                onChange={handleChangePasswordConfirm}
               />
             </Col>
             <Col>
@@ -138,7 +281,13 @@ export default function Register() {
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels">Fecha de Nacimiento</Form.Label>
-              <Form.Control type="date" name="Date" placeholder="DateOfBirth" />
+              <Form.Control
+                type="date"
+                name="Date"
+                placeholder="DateOfBirth"
+                value={birdthday}
+                onChange={handleChangeBirdthday}
+              />
             </Col>
             <Col xs={1}></Col>
           </Row>
@@ -146,7 +295,13 @@ export default function Register() {
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels">Sexo</Form.Label>
-              <Form.Control as="select" size="sm" custom>
+              <Form.Control
+                as="select"
+                size="sm"
+                custom
+                value={gender}
+                onChange={handleChangeGender}
+              >
                 <option>Masculino</option>
                 <option>Femenino</option>
               </Form.Control>
@@ -157,14 +312,19 @@ export default function Register() {
             <Col xs={1}></Col>
             <Col xs={10}>
               <Form.Label className="labels">Nacionalidad</Form.Label>
-              <Form.Control type="text" placeholder="Nacionalidad"/>
+              <Form.Control
+                type="text"
+                placeholder="Nacionalidad"
+                value={nationality}
+                onChange={handleChangeNationality}
+              />
             </Col>
             <Col xs={1}></Col>
           </Row>
         </Container>
       </Form.Group>
 
-      <Button type="submit" className="btn-registrarse">
+      <Button className="btn-registrarse" onClick={createUser}>
         Registrarse
       </Button>
     </Form>
