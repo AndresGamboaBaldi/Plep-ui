@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import Video from "../../components/Video/Video";
 import VideoInfo from "../../components/VideoInfo/VideoInfo";
+import Header from "../../components/Header/Header";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Detail.css";
 import axios from "axios";
 
@@ -33,6 +35,8 @@ export default function Detail() {
 
   return (
     <Container fluid className="body">
+      <Header/>
+      <SearchBar/>
       <Row noGutters>
         <Col lg={8} md={12}>
           <VideoInfo data={selectedMovie} />
