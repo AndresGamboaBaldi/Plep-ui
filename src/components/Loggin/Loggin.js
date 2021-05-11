@@ -101,6 +101,7 @@ export default function Loggin() {
                   placeholder="Enter email"
                   value={email}
                   onChange={handleChange}
+                  className="inputLoggin"
                 />
               </Col>
               <Col xs={1}></Col>
