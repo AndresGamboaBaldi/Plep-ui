@@ -7,8 +7,16 @@ import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Detail.css";
 import axios from "axios";
+import UserStore from "../../Store/UserData.js";
+import { useHistory } from "react-router-dom";
 
 export default function Detail() {
+  let history = useHistory();
+
+  const user = UserStore((state) => state.user);
+  const email = UserStore((state) => state.user);
+  const isLoggedIn = UserStore((state) => state.isLoggedIn);
+
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setMovie] = useState({});
   useEffect(() => {
@@ -33,20 +41,27 @@ export default function Detail() {
     setMovie(passedMovie);
   }, [location]);
 
-  return (
-    <Container fluid className="body">
-      <Header/>
-      <SearchBar data={movies}/>
-      <Row noGutters>
-        <Col lg={8} md={12}>
-          <VideoInfo data={selectedMovie} />
-        </Col>
-        <Col lg={4} md={12} className="mb-4">
-          {movies.map((data) => (
-            <Video data={data} key={data._id} />
-          ))}
-        </Col>
-      </Row>
-    </Container>
-  );
+  const loadFailed = () => {
+    history.push("/");
+  };
+  if(isLoggedIn){
+    return (
+      <Container fluid className="body">
+        <Header />
+        <SearchBar data={movies} />
+        <Row noGutters>
+          <Col lg={8} md={12}>
+            <VideoInfo data={selectedMovie} />
+          </Col>
+          <Col lg={4} md={12} className="mb-4">
+            {movies.map((data) => (
+              <Video data={data} key={data._id} />
+            ))}
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+  return(<body onLoad={loadFailed()}></body>)
+  
 }
