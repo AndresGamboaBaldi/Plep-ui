@@ -62,10 +62,10 @@ export default function SearchBar({ data }) {
               setSearchTerm(event.target.value);
             }}
             aria-describedby="basic-addon1"
-            className="form-control" required
+            className="form-controlSB" required
           />
           <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1" className="form-control">
+            <InputGroup.Text id="basic-addon1" className="form-controlSB">
             <Search className="search-icon"/>
             </InputGroup.Text>
           </InputGroup.Prepend>
