@@ -6,10 +6,17 @@ import { useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Home.css";
 import axios from "axios";
-
-
+import UserStore from "../../Store/UserData.js"
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
+
+let history = useHistory();
+
+const user = UserStore(state => state.user);
+const email = UserStore(state => state.user);
+const isLoggedIn = UserStore(state => state.isLoggedIn);
+
 const [filters, setFilters] = useState({});
 const [movies, setMovies] = useState([]);
 
@@ -29,6 +36,9 @@ useEffect(() => {
   getMovies().catch(null);
 }, []);
 
+const loadFailed = () => {
+  history.push("/");
+};
 
 const location = useLocation();
 
@@ -78,8 +88,8 @@ function validateGenre(genre, videoGenre){
 function validateCountry(country, videoCountry){
   return country !== "" && country !== videoCountry
 }
-
-  return (
+  if(isLoggedIn){
+    return (
       <Container fluid className="body">
           <Header/>
           <SearchBar data={movies}/>
@@ -97,4 +107,8 @@ function validateCountry(country, videoCountry){
           </Row>
       </Container>
   );
+  }
+
+  return(<body onLoad={loadFailed()}></body>);
+  
 }
