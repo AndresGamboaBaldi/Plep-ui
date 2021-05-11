@@ -1,24 +1,29 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col} from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
 import {
-  PersonCircle,
-  Key,
-  EnvelopeFill,
   EyeFill,
   EyeSlashFill,
 } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
+import 'react-toastify/dist/ReactToastify.css';
 import "react-datepicker/dist/react-datepicker.css";
 import "./Register.css";
 import axios from "axios";
 
 export default function Register() {
+
   const [valuesInitial, setValuesInitial] = React.useState({
     password: "",
     showPasswordInitial: false,
   });
-
+  let history = useHistory();
+  const notifyValidation = () => toast("Error al ingreso de datos, Revise que todos los campos esten llenos e intente de nuevo");
+  const notifyPassword = () => toast("Las contraseñas no coinciden");
+  const notifyExistingUser = () => toast("el correo ya esta registrado!");
+  const notifyUser = () => toast("Usuario registrado con exito!",{onClose: returnToLoggin, autoClose:5000});
+  const returnToLoggin = () => {history.push("/")}
   const [valuesConfirm, setValuesConfirm] = React.useState({
     password: "",
     showPasswordConfirm: false,
@@ -36,8 +41,6 @@ export default function Register() {
   const [birdthday, setbirdthday] = React.useState(new Date());
   const [gender, setGender] = React.useState("");
   const [nationality, setNationality] = React.useState("");
-
-  let history = useHistory();
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -140,6 +143,7 @@ export default function Register() {
         for (var x = 0; x < values.data.length; x++) {
           if (email == values.data[x].email) {
             console.log("correo ya esta registrado!");
+            notifyExistingUser();
             flag = true;
             x = values.data.length;
           }
@@ -160,12 +164,18 @@ export default function Register() {
                 })
                 .then(function (response) {
                   console.log(response);
+                  notifyUser();
                 })
                 .catch(function (error) {
                   console.log(error);
                 });
+            }else{
+              notifyPassword();
             }
+          }else{
+            notifyValidation();
           }
+
         }
       })
       .catch((e) => {
@@ -327,6 +337,7 @@ export default function Register() {
       <Button className="btn-registrarse" onClick={createUser}>
         Registrarse
       </Button>
+      <ToastContainer/>
     </Form>
   );
 }
