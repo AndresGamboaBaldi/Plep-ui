@@ -1,17 +1,66 @@
-import React from "react";
-import { Container, Row, InputGroup, FormControl, Dropdown, Form} from "react-bootstrap";
+import React, {useState } from "react";
+import { Container, Row, InputGroup, FormControl, Dropdown, Form, Button} from "react-bootstrap";
 import { Search } from 'react-bootstrap-icons';
+import { useHistory } from "react-router-dom";
 import "./SearchBar.css";
 
-export default function Video(
-) {
+let isVisible = false;
+export default function SearchBar({ data }) {
+  const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState('');
+  let [genre, setGenre] = useState("");
+  let [country, setCountry] = useState("");
+  let [startDate, setStartDate] = useState("");
+  let [endDate, setEndDate] = useState("");
+  
+  let genres = Array.from(new Set(data.map(tempObject => tempObject.genre)));
+  let countries = Array.from(new Set(data.map(tempObject => tempObject.country)));
+
+  function changeRoute (video) {
+    setSearchTerm("");
+    history.push({
+      pathname: '/detail',
+      state: { video: video }
+  })}
+ 
+  function searchByFilters () {
+    setSearchTerm("");
+    let filters = {
+      genre : genre,
+      country: country,
+      startDate : startDate,
+      endDate: endDate
+    }
+    history.push({
+      pathname: '/home',
+      state: { filters: filters }
+  })}
+  function clearFilters () {
+    setCountry("");
+    setGenre("");
+    setEndDate("");
+    setStartDate("");
+    let filters = {
+      genre : genre,
+      country: country,
+      startDate : startDate,
+      endDate: endDate
+    }
+    history.push({
+      pathname: '/home',
+      state: { filters: filters }
+  })}
+
   return (
     <Container fluid className="body">
       <Row noGutters className="bar">
         <InputGroup className="mb-3">
           <FormControl
-            placeholder="Search Movie"
-            aria-label="Search Movie"
+            placeholder="Search by Title"
+            onChange= {(event) => {
+              isVisible = true;
+              setSearchTerm(event.target.value);
+            }}
             aria-describedby="basic-addon1"
             className="form-control" required
           />
@@ -22,32 +71,64 @@ export default function Video(
           </InputGroup.Prepend>
         </InputGroup>
       </Row>
+      
+      {isVisible ? 
+        <div  className = "movie">
+          {data.filter((val)=> {
+            if(searchTerm === "")
+            {
+              isVisible = false;
+              return val
+            } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())){
+              return val
+            }
+            }).map((val,key) => {
+              return (
+                <div onClick={() => changeRoute(val)} key = {key}> 
+                <p> {val.title}</p>
+                </div>
+              );
+          })}
+        </div> 
+        :<div></div>  
+      }
+    
       <Row noGutters className="filters"> 
           
           <h1 className="filterText"> Filters: </h1>
 
           <Dropdown className="dropdowns">
             <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-              Gender
+              Genre
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Animation</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Science Fiction</Dropdown.Item>
+              {genres.map((genre) => (
+                <Dropdown.Item onClick={() => setGenre(genre)} >{genre}</Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
-        
+
+          {genre === "" ? <h2 className="selectedText"> None </h2>: <h2 className="selectedText"> {genre} </h2>
+}
           <h2 className="filterText"> Date between: </h2>
 
           <Form.Group className="datePicker" controlId="dob">
-            <Form.Control type="date" name="dob" placeholder="first date" />
+            <Form.Control type="date" name="start" 
+            placeholder="first date"
+             onChange= {(event) => {
+              setStartDate(event.target.value);
+               }} />
           </Form.Group>
 
           <h2 className="filterText"> and </h2>
 
           <Form.Group className="datePicker" controlId="dob">
-            <Form.Control type="date" name="dob" placeholder="second date" />
+            <Form.Control type="date" name="end" 
+            placeholder="second date"
+            onChange= {(event) => {
+              setEndDate(event.target.value);
+            }} />
           </Form.Group>
 
         <Dropdown className="dropdowns">
@@ -55,11 +136,15 @@ export default function Video(
               Country
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">USA</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">China</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">France</Dropdown.Item>
+              {countries.map((country) => (
+                <Dropdown.Item onClick={() => setCountry(country)}>{country}</Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
+          {country === "" ? <h2 className="selectedText"> None </h2>: <h2 className="selectedText"> {country} </h2>}
+
+          <Button size="sm" className="buttons" variant="danger" onClick={() => searchByFilters()}> Apply Filters </Button>
+          <Button size="sm" className="buttons" variant="dark" onClick={() => clearFilters()}> Clear Filters </Button>
       </Row>
     </Container>
   );

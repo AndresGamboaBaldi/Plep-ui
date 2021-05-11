@@ -1,6 +1,7 @@
 .dropdowns{
     background-color: #3d3d3d;
     color: white;
+    font-size: 12px;
 }
 .filterText{
     color:white;
@@ -12,7 +13,6 @@
 .filters{
     margin-bottom: 20px;
     background-color: #474747;
-    width: 52%;
 }
 .form-control {
     background-color:#3d3d3d !important;
@@ -23,4 +23,19 @@
 }
 .datePicker{
     height: 10px;
+}
+.movie{
+    color: white;
+    font-size: 12px;
+    background-color: #3d3d3d;
+}
+.selectedText{
+    color: #FF0000;
+    font-size: 14px;
+    padding-top: 12px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+.buttons{
+    margin-right: 10px;
 }
