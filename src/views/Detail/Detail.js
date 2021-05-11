@@ -45,6 +45,7 @@ export default function Detail() {
     history.push("/");
   };
   if(isLoggedIn){
+
     return (
       <Container fluid className="body">
         <Header />

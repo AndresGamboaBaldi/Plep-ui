@@ -22,6 +22,16 @@ export default function SearchBar({ data }) {
       pathname: '/detail',
       state: { video: video }
   })}
+
+  function filterTitle(video){
+    if(searchTerm === "")
+    {
+      isVisible = false;
+      return video
+    } else if (video.title.toLowerCase().includes(searchTerm.toLowerCase())){
+      return video
+    }
+  }
  
   function searchByFilters () {
     setSearchTerm("");
@@ -74,15 +84,9 @@ export default function SearchBar({ data }) {
       
       {isVisible ? 
         <div  className = "movie">
-          {data.filter((val)=> {
-            if(searchTerm === "")
-            {
-              isVisible = false;
-              return val
-            } else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())){
-              return val
-            }
-            }).map((val,key) => {
+          {data.filter((val)=> 
+           filterTitle(val)
+            ).map((val,key) => {
               return (
                 <div onClick={() => changeRoute(val)} key = {key}> 
                 <p> {val.title}</p>

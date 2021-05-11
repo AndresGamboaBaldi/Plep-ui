@@ -1,9 +1,12 @@
 import React from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./Header.css";
+import UserStore from "../../Store/UserData.js";
+
 
 export default function Video(
 ) {
+  const user = UserStore((state) => state.user);
   return (
     <Container fluid className="body">
       <Row noGutters>
@@ -18,7 +21,7 @@ export default function Video(
             <Image className = "image" src="https://picsum.photos/id/1074/80/80" roundedCircle />
         </Col>
         <Col lg={3} md={12}>
-            <h1 className="title"> Andres Gamboa </h1>
+            <h1 className="title">{user} </h1>
         </Col>
       </Row>
     </Container>

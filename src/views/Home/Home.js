@@ -32,9 +32,9 @@ useEffect(() => {
     }
   };
   
-
+  console.log(movies);
   getMovies().catch(null);
-}, []);
+}, [movies]);
 
 const loadFailed = () => {
   history.push("/");
@@ -48,7 +48,6 @@ useEffect(() => {
 }, [location]);
 
 function validateFilters (video) {
-  console.log(filters)
   if(typeof filters === 'undefined'){
     return true
   } else if (validateGenre(filters.genre, video.genre)){
@@ -70,15 +69,9 @@ function validateDate(startDate, endDate, videoDate){
   var d1 = dateFrom.split("-");
   var d2 = dateTo.split("-");
   var c = dateCheck.split("-");
-  var from = new Date(d1[0], parseInt(d1[1])-1, d1[2]);  // -1 because months are from 0 to 11
+  var from = new Date(d1[0], parseInt(d1[1])-1, d1[2]);  
   var to   = new Date(d2[0], parseInt(d2[1])-1, d2[2]);
   var check = new Date(c[0], parseInt(c[1]-1), c[2]);
- //"02/05/2013"
- //"2003-01-31"
-  console.log(from)
-  console.log(to)
-  console.log(to)
-  console.log(check > from && check < to)
   return !(startDate === "" || endDate === "" || (check > from && check < to))
 }
 
