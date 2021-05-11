@@ -36,7 +36,7 @@ export default function Detail() {
   return (
     <Container fluid className="body">
       <Header/>
-      <SearchBar/>
+      <SearchBar data={movies}/>
       <Row noGutters>
         <Col lg={8} md={12}>
           <VideoInfo data={selectedMovie} />

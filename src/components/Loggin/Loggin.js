@@ -69,7 +69,7 @@ export default function Loggin() {
         }
         if(flag)
         {
-          history.push("/detail");
+          history.push("/home");
         }
       })
       .catch((e) => {
