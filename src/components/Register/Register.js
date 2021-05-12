@@ -1,29 +1,59 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Container, Row, Col} from "react-bootstrap";
-import { ToastContainer, toast } from 'react-toastify';
-import {
-  EyeFill,
-  EyeSlashFill,
-} from "react-bootstrap-icons";
+import { Button, Container, Row, Col } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Register.css";
 import axios from "axios";
+import validator from "validator";
 
 export default function Register() {
+  const returnToLoggin = () => {
+    history.push("/");
+  };
 
   const [valuesInitial, setValuesInitial] = React.useState({
     password: "",
     showPasswordInitial: false,
   });
   let history = useHistory();
-  const notifyValidation = () => toast("Error al ingreso de datos, Revise que todos los campos esten llenos e intente de nuevo");
-  const notifyPassword = () => toast("Las contraseñas no coinciden");
-  const notifyExistingUser = () => toast("el correo ya esta registrado!");
-  const notifyUser = () => toast("Usuario registrado con exito!",{onClose: returnToLoggin, autoClose:5000});
-  const returnToLoggin = () => {history.push("/")}
+  let toasterror = {
+    position: toast.POSITION.BOTTOM_CENTER,
+    className: "ErrorMessage",
+    progressClassName: "ErrorProgress",
+  };
+  let toastSuccess = {
+    position: toast.POSITION.BOTTOM_CENTER,
+    onClose: returnToLoggin,
+    autoClose: 5000,
+    className: "SuccessUser",
+    progressClassName: "SuccessProgress",
+  };
+  const notifyBirthday = () =>
+    toast(
+      "Elija una fecha de nacimiento", toasterror
+    );
+  const notifyInputs = () =>
+    toast(
+      "Error al ingreso de datos, solo se admiten letras en los campos de nombre, apellido y nacionalidad",
+      toasterror
+    );
+  const notifyValidation = () =>
+    toast(
+      "Error al ingreso de datos, Revise que todos los campos esten llenos e intente de nuevo",
+      toasterror
+    );
+  const notifyPassword = () =>
+    toast("Las contraseñas no coinciden", toasterror);
+  const notifyEmail = () =>
+    toast("Ingrese una direccion de correo valida", toasterror);
+  const notifyExistingUser = () =>
+    toast("el correo ya esta registrado!", toasterror);
+  const notifyUser = () => toast("Usuario registrado con exito!", toastSuccess);
+
   const [valuesConfirm, setValuesConfirm] = React.useState({
     password: "",
     showPasswordConfirm: false,
@@ -32,7 +62,7 @@ export default function Register() {
   const [values, setValues] = React.useState({
     data: [],
   });
-
+  const [updatedDate, setUpdatedDate] = React.useState(false);
   const [name, setName] = React.useState("");
   const [lastname, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -64,6 +94,7 @@ export default function Register() {
 
   const handleChangeBirdthday = (e) => {
     setbirdthday(e.target.value);
+    setUpdatedDate(true);
   };
 
   const handleChangeGender = (e) => {
@@ -85,10 +116,6 @@ export default function Register() {
     event.preventDefault();
   };
 
-  const handlePasswordChangeInitial = (prop) => (event) => {
-    setValuesInitial({ ...valuesInitial, [prop]: event.target.valuesInitial });
-  };
-
   const handleClickShowPasswordConfirm = () => {
     setValuesConfirm({
       ...valuesConfirm,
@@ -100,8 +127,16 @@ export default function Register() {
     event.preventDefault();
   };
 
-  const handlePasswordChangeConfirm = (prop) => (event) => {
-    setValuesConfirm({ ...valuesConfirm, [prop]: event.target.valuesConfirm });
+  const verifyEmail = () => {
+    return validator.isEmail(email);
+  };
+
+  const verifyInputs = () => {
+    return (
+      validator.isAlpha(name) &&
+      validator.isAlpha(lastname) &&
+      validator.isAlpha(nationality)
+    );
   };
 
   const verifyPasswords = () => {
@@ -117,17 +152,8 @@ export default function Register() {
       lastname.trim() === "" ||
       passwordInitial.trim() === "" ||
       passwordConfirm.trim() === "" ||
-      birdthday.trim() === "" ||
       nationality.trim() === ""
     ) {
-      console.log("Elemento vacio, llene todos los campos");
-      console.log(name.trim());
-      console.log(lastname.trim());
-      console.log(passwordInitial.trim());
-      console.log(passwordConfirm.trim());
-      console.log(gender.trim());
-      console.log(nationality.trim());
-
       return false;
     }
     return true;
@@ -139,58 +165,61 @@ export default function Register() {
       .get("https://plep.herokuapp.com/api/user")
       .then((response) => {
         values.data = response.data;
-        console.log("funciona", values.data);
         for (var x = 0; x < values.data.length; x++) {
           if (email == values.data[x].email) {
-            console.log("correo ya esta registrado!");
             notifyExistingUser();
             flag = true;
             x = values.data.length;
           }
         }
         if (!flag) {
-          console.log("llegue");
-          console.log(flag);
-          if(verifyFields()){
-            if (verifyPasswords()) {
-              axios
-                .post("https://plep.herokuapp.com/api/user", {
-                  userName: name + " " + lastname,
-                  email: email,
-                  password: passwordInitial,
-                  birthdate: birdthday,
-                  gender: gender,
-                  country: nationality,
-                })
-                .then(function (response) {
-                  console.log(response);
-                  notifyUser();
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }else{
-              notifyPassword();
+          if (verifyFields()) {
+            if (verifyEmail()) {
+              if (verifyInputs()) {
+                if (updatedDate) {
+                  if (verifyPasswords()) {
+                    axios
+                      .post("https://plep.herokuapp.com/api/user", {
+                        userName: name + " " + lastname,
+                        email: email,
+                        password: passwordInitial,
+                        birthdate: birdthday,
+                        gender: gender,
+                        country: nationality,
+                      })
+                      .then(function (response) {
+                        console.log(response);
+                        notifyUser();
+                      })
+                      .catch(function (error) {
+                        console.log(error);
+                      });
+                  } else {
+                    notifyPassword();
+                  }
+                } else {
+                  notifyBirthday();
+                }
+              } else {
+                notifyInputs();
+              }
+            } else {
+              notifyEmail();
             }
-          }else{
+          } else {
             notifyValidation();
           }
-
         }
       })
       .catch((e) => {
         console.log("error", e);
       });
-
-      
   }
 
   return (
     <Form className="text-center bg-white form">
       <Form.Group controlId="formBasicEmail">
-        <Form.Label className="labels">
-          Registrarse
-        </Form.Label>
+        <Form.Label className="labels">Registrarse</Form.Label>
 
         <Container>
           <Row>
@@ -337,7 +366,7 @@ export default function Register() {
       <Button className="btn-registrarse" onClick={createUser}>
         Registrarse
       </Button>
-      <ToastContainer/>
+      <ToastContainer />
     </Form>
   );
 }
