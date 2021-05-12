@@ -47,6 +47,8 @@ useEffect(() => {
 function validateFilters (video) {
   if(typeof filters === 'undefined'){
     return true
+  } else if (validateSearchTerm(filters.searchTerm, video.title)){
+    return false
   } else if (validateGenre(filters.genre, video.genre)){
     return false
   } else if (validateCountry(filters.country, video.country)){
@@ -78,19 +80,20 @@ function validateGenre(genre, videoGenre){
 function validateCountry(country, videoCountry){
   return country !== "" && country !== videoCountry
 }
+function validateSearchTerm(searchTerm, videoTitle){
+  //console.log(searchTerm);
+  return searchTerm !== "" && !videoTitle.toLowerCase().includes(searchTerm.toLowerCase())
+}
+
   if(isLoggedIn){
     return (
       <Container fluid className="body">
           <Header/>
           <SearchBar data={movies}/>
           <Row noGutters>
-          {movies.filter((val) => {
-            if(validateFilters(val))
-            {
-              return val
-            }
-            return [];
-            }).map((data) => (
+          {movies.filter((val) => 
+            validateFilters(val)
+            ).map((data) => (
             <Col xs={6} lg={3} className="mb-5" key={data._id}>
               <Video data={data}/>
             </Col>

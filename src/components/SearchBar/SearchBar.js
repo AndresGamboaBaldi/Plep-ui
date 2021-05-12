@@ -39,7 +39,8 @@ export default function SearchBar({ data }) {
       genre : genre,
       country: country,
       startDate : startDate,
-      endDate: endDate
+      endDate: endDate,
+      searchTerm: searchTerm
     }
     history.push({
       pathname: '/home',
@@ -54,7 +55,8 @@ export default function SearchBar({ data }) {
       genre : genre,
       country: country,
       startDate : startDate,
-      endDate: endDate
+      endDate: endDate,
+      searchTerm: searchTerm
     }
     history.push({
       pathname: '/home',
@@ -76,7 +78,8 @@ export default function SearchBar({ data }) {
           />
           <InputGroup.Prepend>
             <InputGroup.Text id="basic-addon1" className="form-controlSB">
-            <Search className="search-icon"/>
+            <Button variant="outline-primary"><Search className="search-icon" onClick={() => searchByFilters()}/></Button>
+            
             </InputGroup.Text>
           </InputGroup.Prepend>
         </InputGroup>
@@ -110,6 +113,7 @@ export default function SearchBar({ data }) {
               {genres.map((genre,index) => (
                 <Dropdown.Item onClick={() => setGenre(genre)} key={index}>{genre}</Dropdown.Item>
               ))}
+              <Dropdown.Item onClick={() => setGenre("")}>None</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -143,6 +147,7 @@ export default function SearchBar({ data }) {
               {countries.map((country, index) => (
                 <Dropdown.Item onClick={() => setCountry(country)} key={index}>{country}</Dropdown.Item>
               ))}
+              <Dropdown.Item onClick={() => setCountry("")}>None</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           {country === "" ? <h2 className="selectedText"> None </h2>: <h2 className="selectedText"> {country} </h2>}

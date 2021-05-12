@@ -17,6 +17,7 @@
 .form-controlSB {
     background-color:#3d3d3d !important;
     font: white;
+    padding: 0px !important;
 }
 .search-icon{
     color: white !important;

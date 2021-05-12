@@ -83,7 +83,8 @@ export default function Loggin() {
             genre : "",
             country: "",
             startDate : "",
-            endDate: ""
+            endDate: "",
+            searchTerm: ""
           };
           history.push({
             pathname: '/home',
