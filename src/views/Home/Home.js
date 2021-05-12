@@ -13,8 +13,6 @@ export default function Home() {
 
 let history = useHistory();
 
-const user = UserStore(state => state.user);
-const email = UserStore(state => state.user);
 const isLoggedIn = UserStore(state => state.isLoggedIn);
 
 const [filters, setFilters] = useState({});
@@ -93,7 +91,7 @@ function validateCountry(country, videoCountry){
               return val
             }
             }).map((data) => (
-            <Col xs={5} lg={3} className="mb-5" key={data._id}>
+            <Col xs={6} lg={3} className="mb-5" key={data._id}>
               <Video data={data}/>
             </Col>
           ))}

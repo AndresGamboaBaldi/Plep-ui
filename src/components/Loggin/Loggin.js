@@ -79,7 +79,16 @@ export default function Loggin() {
         if(flag)
         {
           signIn(values.data[index].userName, values.data[index].email);
-          history.push("/home");
+          let filters = {
+            genre : "",
+            country: "",
+            startDate : "",
+            endDate: ""
+          };
+          history.push({
+            pathname: '/home',
+            state: { filters: filters }
+          });
         }
       })
       .catch((e) => {

@@ -29,8 +29,8 @@ export default function Video({ data }) {
               <Card.Title className="title-text">{data.title}</Card.Title>
               <Card.Text className="genre-text">{data.genre}</Card.Text>
               <Card.Text>
-                <FlagFill className="flag-icon" />
-                {data.country}
+                <FlagFill className="flag-icon"/>
+                {` ${data.country}`}
               </Card.Text>
               <Card.Text>{data.date.substring(0, 10)}</Card.Text>
             </Card.Body>
