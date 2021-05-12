@@ -59,7 +59,7 @@ export default function Register() {
     showPasswordConfirm: false,
   });
 
-  const [values, setValues] = React.useState({
+  const [values] = React.useState({
     data: [],
   });
   const [updatedDate, setUpdatedDate] = React.useState(false);
@@ -166,7 +166,7 @@ export default function Register() {
       .then((response) => {
         values.data = response.data;
         for (var x = 0; x < values.data.length; x++) {
-          if (email == values.data[x].email) {
+          if (email === values.data[x].email) {
             notifyExistingUser();
             flag = true;
             x = values.data.length;
