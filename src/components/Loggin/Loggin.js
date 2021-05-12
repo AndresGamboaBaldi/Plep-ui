@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import {withRouter} from 'react-router';
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import {
   PersonCircle,
@@ -13,18 +12,40 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import UserStore from "../../Store/UserData.js";
 import "./Loggin.css";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Loggin() {
   const [values, setValues] = React.useState({
     showPassword: false,
     data: [],
   });
-
-  const LoggIn = UserStore(state => state.LoggIn)
-  const[email, setEmail] = React.useState('');
-  const[password, setPassword] = React.useState('');
   let history = useHistory();
+  const goToHome = () => {
+    history.push("/home");
+  };
+
+  let toasterror = {
+    position: toast.POSITION.BOTTOM_CENTER,
+    className: "ErrorMessage",
+    progressClassName: "ErrorProgress",
+  };
+  let toastSuccess = {
+    position: toast.POSITION.BOTTOM_CENTER,
+    onClose: goToHome,
+    autoClose: 2000,
+    className: "SuccessUser",
+    progressClassName: "SuccessProgress",
+  };
+  const notifyValidation = () =>
+    toast("Email o Contraseña incorrecto", toasterror);
+  const notifyUserLoggin = () =>
+    toast("Usuario ingresado correctamente", toastSuccess);
+
+  const LoggIn = UserStore((state) => state.LoggIn);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -42,13 +63,9 @@ export default function Loggin() {
     event.preventDefault();
   };
 
-  const handlePasswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const signIn = (username, newemail) => {
+    LoggIn(username, newemail);
   };
-
-  const signIn = (username, newemail) =>{
-    LoggIn(username,newemail);
-  }
 
   async function verifyPassword() {
     let index = -1;
@@ -57,46 +74,41 @@ export default function Loggin() {
       .then((response) => {
         values.data = response.data;
         console.log("funciona", values.data);
-        var flag=false;
+        var flag = false;
         for (var x = 0; x < values.data.length; x++) {
           if (
-            email == values.data[x].email &&
-            password == values.data[x].password
+            email === values.data[x].email &&
+            password === values.data[x].password
           ) {
-            console.log("login!");
             index = x;
-            flag=true;
-            x=values.data.length;
-          } else{
-            console.log("no login");
-            console.log("Usuario introducido", email);
-            console.log("Usuario esperado", values.data[x].email);
-            
-            console.log("Contrasena introducida", password);
-            console.log("Contrasena esperada", values.data[x].password);
-          }
+            flag = true;
+            x = values.data.length;
+          } 
         }
-        if(flag)
-        {
+        if (flag) {
           signIn(values.data[index].userName, values.data[index].email);
-          history.push("/home");
+          notifyUserLoggin();
+        }else {
+          notifyValidation();
         }
       })
       .catch((e) => {
         console.log("error", e);
       });
-  };
+  }
 
-  function goToRegister () {
-    history.push("/register")
+  function goToRegister() {
+    history.push("/register");
   }
 
   return (
     <div>
       <Form className="text-center bg-white formLoggin">
         <Form.Group controlId="formBasicEmail">
-          <Form.Label className="labelsHeader">Bienvenido a Plep videos!!!</Form.Label>
-          <br/>
+          <Form.Label className="labelsHeader">
+            Bienvenido a Plep videos!!!
+          </Form.Label>
+          <br />
           <Form.Label className="labels">Email</Form.Label>
           <Container>
             <Row>
@@ -105,7 +117,6 @@ export default function Loggin() {
                 <PersonCircle size={40} />
               </Col>
               <Col xs={9}>
-                
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
@@ -169,6 +180,7 @@ export default function Loggin() {
           </Button>
         </Card.Body>
       </Card>
+      <ToastContainer />
     </div>
   );
 }
