@@ -45,5 +45,27 @@
     color: #282828 !important;
 }
 
+.SuccessUser{
+    background-color: white;
+    border-color: green;
+    color: green;
+    border-style: solid;
+    border-radius: 10px;
+}
 
+.SuccessProgress{
+    background: green;
+}
+
+.ErrorMessage{
+    background-color: white;
+    border-color: red;
+    color: red;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.ErrorProgress{
+    background: red;
+}
 
