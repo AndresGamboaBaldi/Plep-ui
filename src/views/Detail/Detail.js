@@ -12,9 +12,6 @@ import { useHistory } from "react-router-dom";
 
 export default function Detail() {
   let history = useHistory();
-
-  const user = UserStore((state) => state.user);
-  const email = UserStore((state) => state.user);
   const isLoggedIn = UserStore((state) => state.isLoggedIn);
 
   const [movies, setMovies] = useState([]);
@@ -44,8 +41,7 @@ export default function Detail() {
   const loadFailed = () => {
     history.push("/");
   };
-  if(isLoggedIn){
-
+  if (isLoggedIn) {
     return (
       <Container fluid className="body">
         <Header />
@@ -63,6 +59,5 @@ export default function Detail() {
       </Container>
     );
   }
-  return(<body onLoad={loadFailed()}></body>)
-  
+  return <body onLoad={loadFailed()}></body>;
 }

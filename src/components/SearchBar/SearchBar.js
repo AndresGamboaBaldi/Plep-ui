@@ -107,8 +107,8 @@ export default function SearchBar({ data }) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {genres.map((genre) => (
-                <Dropdown.Item onClick={() => setGenre(genre)} >{genre}</Dropdown.Item>
+              {genres.map((genre,index) => (
+                <Dropdown.Item onClick={() => setGenre(genre)} key={index}>{genre}</Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
@@ -140,8 +140,8 @@ export default function SearchBar({ data }) {
               Country
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {countries.map((country) => (
-                <Dropdown.Item onClick={() => setCountry(country)}>{country}</Dropdown.Item>
+              {countries.map((country, index) => (
+                <Dropdown.Item onClick={() => setCountry(country)} key={index}>{country}</Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>

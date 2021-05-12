@@ -29,8 +29,7 @@ useEffect(() => {
       console.log(err);
     }
   };
-  
-  console.log(movies);
+
   getMovies().catch(null);
 }, [movies]);
 
@@ -90,6 +89,7 @@ function validateCountry(country, videoCountry){
             {
               return val
             }
+            return [];
             }).map((data) => (
             <Col xs={6} lg={3} className="mb-5" key={data._id}>
               <Video data={data}/>
