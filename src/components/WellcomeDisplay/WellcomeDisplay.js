@@ -6,7 +6,7 @@ export default function WellcomeDisplay(){
     return(
         <Card className="text-center cardDisplay">
             <Card.Header className="headerDisplay">Plep</Card.Header>
-            <Card.Img src={process.env.PUBLIC_URL + '/play-icon.png'} />
+            <Card.Img src={process.env.PUBLIC_URL + '/play-icon.png'} className="image"/>
             <Card.Body className="bodyDisplay">Disfruta de todo nuestro contenido directo en tus manos</Card.Body>
         </Card>
     );
