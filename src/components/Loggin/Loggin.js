@@ -117,7 +117,7 @@ export default function Loggin() {
       <Form className="text-center bg-white formLoggin">
         <Form.Group controlId="formBasicEmail">
           <Form.Label className="labelsHeader">
-            Bienvenido a Plep videos!!!
+            Welcome to PLEP videos!!!
           </Form.Label>
           <br />
           <Form.Label className="labels">Email</Form.Label>
@@ -178,16 +178,16 @@ export default function Loggin() {
           </Container>
         </Form.Group>
         <Button className="btn-sesion" onClick={verifyPassword}>
-          Iniciar Sesion
+          Log In
         </Button>
       </Form>
       <Card className="text-center bg-white card">
         <Card.Title className="labels">
-          No es un miembro? Registrese hoy!
+          Not a member? join today!!!
         </Card.Title>
         <Card.Body>
           <Button type="submit" className="btn-register" onClick={goToRegister}>
-            <EnvelopeFill size={30} /> Registro por correo
+            <EnvelopeFill size={30} /> Email Register
           </Button>
         </Card.Body>
       </Card>
