@@ -59,5 +59,5 @@ export default function Detail() {
       </Container>
     );
   }
-  return <body onLoad={loadFailed()}></body>;
+  return <div onLoad={loadFailed()}></div>;
 }

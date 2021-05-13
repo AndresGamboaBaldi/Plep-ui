@@ -103,6 +103,6 @@ function validateSearchTerm(searchTerm, videoTitle){
   );
   }
 
-  return(<body onLoad={loadFailed()}></body>);
+  return <div onLoad={loadFailed()}></div>;
   
 }
