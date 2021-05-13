@@ -78,7 +78,7 @@ export default function SearchBar({ data }) {
           />
           <InputGroup.Prepend>
             <InputGroup.Text id="basic-addon1" className="form-controlSB">
-            <Button variant="outline-primary"><Search className="search-icon" onClick={() => searchByFilters()}/></Button>
+            <Button variant="outline-primary" onClick={() => searchByFilters()}><Search className="search-icon"/></Button>
             
             </InputGroup.Text>
           </InputGroup.Prepend>
