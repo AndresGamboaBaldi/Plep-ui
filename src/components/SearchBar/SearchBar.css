@@ -8,16 +8,21 @@
     font-size: 12px;
     padding-top: 10px;
     margin-right: 10px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .filters{
     margin-bottom: 20px;
     background-color: #474747;
+    border-radius: 10px;
 }
 .form-controlSB {
     background-color:#3d3d3d !important;
     font: white;
+    color: white !important;
     padding: 0px !important;
+    padding-left: 10px !important;
+    text-align: left;
+
 }
 .search-icon{
     color: white !important;
@@ -35,8 +40,31 @@
     font-size: 14px;
     padding-top: 12px;
     margin-right: 20px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
-.buttons{
+.button-apply{
     margin-right: 10px;
+    background-color: #FF0000 !important;
+    border-color: #FF0000 !important;
+}
+
+.button-clear{
+    margin-right: 10px;
+    background-color: white !important;
+    border-color: #FF0000 !important;
+    color: #FF0000 !important;
+}
+
+.searchButton{
+    background-color: #FF0000 !important; 
+    border-color:white !important;
+    color: white !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+#dropdown-basic{
+    background-color: #FF0000 !important;
+    color: white !important;
+    border-color: #FF0000 !important;
 }

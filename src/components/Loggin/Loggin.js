@@ -72,7 +72,6 @@ export default function Loggin() {
       .get("https://plep.herokuapp.com/api/user")
       .then((response) => {
         values.data = response.data;
-        console.log("funciona", values.data);
         var flag = false;
         for (var x = 0; x < values.data.length; x++) {
           if (
@@ -158,6 +157,7 @@ export default function Loggin() {
                   value={password}
                   onChange={handleChangePassword}
                   placeholder="Password"
+                  className="inputLoggin"
                 />
               </Col>
               <Col>

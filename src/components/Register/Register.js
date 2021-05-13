@@ -98,7 +98,6 @@ export default function Register() {
   };
 
   const handleChangeGender = (e) => {
-    console.log(gender);
     setGender(e.target.value);
   };
 
@@ -188,7 +187,6 @@ export default function Register() {
                         country: nationality,
                       })
                       .then(function (response) {
-                        console.log(response);
                         notifyUser();
                       })
                       .catch(function (error) {
