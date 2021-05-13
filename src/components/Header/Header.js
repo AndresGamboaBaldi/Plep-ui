@@ -37,7 +37,7 @@ export default function Video(
             <h1 className="title"> Plep </h1>
         </Col>
         <Col xs={2} lg={1} className="mb-4">
-            <PersonCircle className = "image" roundedCircle />
+            <PersonCircle className = "image" />
         </Col>
         <Col xs={3} lg={2}>
             <h1 className="username">{user} </h1>
