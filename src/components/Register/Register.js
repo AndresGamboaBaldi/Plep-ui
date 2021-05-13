@@ -219,13 +219,13 @@ export default function Register() {
   return (
     <Form className="text-center bg-white form">
       <Form.Group controlId="formBasicEmail">
-        <Form.Label className="labels">Registrarse</Form.Label>
+        <Form.Label className="labels">Register</Form.Label>
 
         <Container>
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
-              <Form.Label className="labels"> Nombre </Form.Label>
+              <Form.Label className="labels"> Name </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Pepe"
@@ -238,7 +238,7 @@ export default function Register() {
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
-              <Form.Label className="labels"> Apellido </Form.Label>
+              <Form.Label className="labels"> LastName </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Perez"
@@ -261,13 +261,13 @@ export default function Register() {
             </Col>
             <Col xs={1}></Col>
             <Form.Text className="text-muted label-text">
-              Nunca compartiremos tu informacion personal con nadie.
+              We will never share your personal information.
             </Form.Text>
           </Row>
           <Row>
             <Col xs={1}></Col>
             <Col xs={8}>
-              <Form.Label className="labels">Ingrese Contraseña</Form.Label>
+              <Form.Label className="labels">Password</Form.Label>
               <Form.Control
                 type={valuesInitial.showPasswordInitial ? "text" : "password"}
                 placeholder="Pass123"
@@ -293,7 +293,7 @@ export default function Register() {
           <Row>
             <Col xs={1}></Col>
             <Col xs={8}>
-              <Form.Label className="labels">Confirme contraseña</Form.Label>
+              <Form.Label className="labels">Confirm Password</Form.Label>
               <Form.Control
                 type={valuesConfirm.showPasswordConfirm ? "text" : "password"}
                 placeholder="Pass123"
@@ -319,7 +319,7 @@ export default function Register() {
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
-              <Form.Label className="labels">Fecha de Nacimiento</Form.Label>
+              <Form.Label className="labels">Birthdate</Form.Label>
               <Form.Control
                 type="date"
                 name="Date"
@@ -333,7 +333,7 @@ export default function Register() {
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
-              <Form.Label className="labels">Sexo</Form.Label>
+              <Form.Label className="labels">Gender</Form.Label>
               <Form.Control
                 as="select"
                 size="sm"
@@ -341,8 +341,8 @@ export default function Register() {
                 value={gender}
                 onChange={handleChangeGender}
               >
-                <option>Masculino</option>
-                <option>Femenino</option>
+                <option>Male</option>
+                <option>Female</option>
               </Form.Control>
             </Col>
             <Col xs={1}></Col>
@@ -350,10 +350,10 @@ export default function Register() {
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}>
-              <Form.Label className="labels">Nacionalidad</Form.Label>
+              <Form.Label className="labels">Country</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Nacionalidad"
+                placeholder="Bolivian"
                 value={nationality}
                 onChange={handleChangeNationality}
               />
@@ -364,7 +364,7 @@ export default function Register() {
       </Form.Group>
 
       <Button className="btn-registrarse" onClick={createUser}>
-        Registrarse
+        Register
       </Button>
       <ToastContainer />
     </Form>
