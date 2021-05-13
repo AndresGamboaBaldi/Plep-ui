@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { PersonCircle } from "react-bootstrap-icons";
 import "./Header.css";
 import UserStore from "../../Store/UserData.js";
 
@@ -36,7 +37,7 @@ export default function Video(
             <h1 className="title"> Plep </h1>
         </Col>
         <Col xs={2} lg={1} className="mb-4">
-            <Image className = "image" src="https://picsum.photos/id/1074/80/80" roundedCircle />
+            <PersonCircle className = "image" />
         </Col>
         <Col xs={3} lg={2}>
             <h1 className="username">{user} </h1>
