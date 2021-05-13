@@ -1,0 +1,58 @@
+.form{
+    background-color: white;
+    margin-top: 1rem;
+    border-radius: 10px;
+
+}
+
+.btn-registrarse{
+    background-color: red !important;
+    border-color: red !important;
+    margin: 0.5rem;
+    margin-bottom: 2rem;
+    border-radius: 10px !important;
+}
+
+
+.labels{
+    margin-top: 0.5rem;
+}
+
+.btn-showHide{
+    border-color: #282828 !important;
+    background-color: white !important;
+    border-radius: 30px !important;
+    margin-top: 2.5rem;
+}
+
+.icons{
+    color: #282828 !important;
+}
+
+.label-text{
+    margin: auto;
+}
+
+.SuccessUser{
+    background-color: white;
+    border-color: green;
+    color: green;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.SuccessProgress{
+    background: green;
+}
+
+.ErrorMessage{
+    background-color: white;
+    border-color: red;
+    color: red;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.ErrorProgress{
+    background: red;
+}

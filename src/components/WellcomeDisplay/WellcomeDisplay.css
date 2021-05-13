@@ -1,0 +1,31 @@
+.header{
+    color: white;
+    background-color: #282828;
+    font-size: 100px;
+    width: auto;   
+}
+
+.bodyDisplay{
+    color:white;
+    background-color: #282828;
+    border-color: #282828 !important;
+    width: 100%;
+    font-size: 25px;
+}
+
+.headerDisplay{
+    color: white;
+    background-color: #282828;
+    border-color: #282828 !important;
+    font-size: 90px;
+}
+
+.cardDisplay{
+    width: auto;
+    background-color: #282828 !important;
+    border-color: #282828;
+}
+
+.imageDisplay{
+    height: 440px !important;
+}

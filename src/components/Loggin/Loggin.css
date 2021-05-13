@@ -1,0 +1,75 @@
+.formLoggin{
+    background-color: white;
+    margin-top: 30%;
+    border-radius: 10px;
+
+}
+
+.inputLoggin{
+    margin-left: 3px;
+}
+
+.btn-sesion{
+    background-color: red !important;
+    border-color: red !important;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px !important;
+}
+
+.btn-register{
+    background-color: #282828 !important;
+    border-color: #282828 !important;
+    border-radius: 10px !important;
+    margin-bottom: 1rem;
+
+}
+
+.card{
+    border-radius: 10px !important;
+    margin-top: 3px;
+}
+
+.labels{
+    margin-top: 3rem;
+}
+
+.labelsHeader{
+    margin-top: 1rem;
+    font-size: 30px;
+}
+
+.btn-showHideLoggin{
+    border-color: #282828 !important;
+    background-color: white !important;
+    border-radius: 30px !important;
+}
+
+.icons{
+    color: #282828 !important;
+}
+
+.SuccessUser{
+    background-color: white;
+    border-color: green;
+    color: green;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.SuccessProgress{
+    background: green;
+}
+
+.ErrorMessage{
+    background-color: white;
+    border-color: red;
+    color: red;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.ErrorProgress{
+    background: red;
+}
+
